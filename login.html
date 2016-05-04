@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>五洲联鑫OA系统</title>
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="js/bootstrap/3.3.5/css/bootstrap.min.css">
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.cookie.js"></script>
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="js/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <style type="text/css">
+    body {
+        padding-top: 20px;
+        padding-bottom: 20px;
+        font-family: 微软雅黑;
+    }
+    .form-login {
+        max-width: 350px;
+        padding: 15px;
+        /*position:absolute;*/
+        left:0;
+        top:0;
+        margin:0 auto;
+        padding:0;
+    }
+    #title {
+        margin-top: 80px;
+        text-align: center;
+        color: #7A7A7A;
+    }
+    
+    small {
+        font-size: 1em;
+        color: #B3B3B3;
+        margin-left: 5px;
+    }
+    
+    body {
+        background-image: url(images/grey_@2X.png);
+        background-repeat: repeat;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2 id="title">五洲联鑫OA系统<small>beta</small></h2>
+        <form class="form-login" method="post" action="doLogin.php">
+            <div class="form-group">
+                <label for="username">用户名:</label>
+                <input type="text" class="form-control" id="txt_username" name="username" placeholder="请输入用户名" required autofocus>
+            </div>
+            <div class="form-group">
+                <label for="userpasssword">密码:</label>
+                <input type="password" class="form-control" id="txt_password" name="password" placeholder="请输入输入密码" required>
+            </div>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" name="ck_rmbUser"> 记住密码
+                </label>
+            </div>
+            <button type="submit" class="btn btn-success btn-block " id="submit">登录</button>
+        </form>
+    </div>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        if ($.cookie("rmbUser") == "true") {
+            $("#ck_rmbUser").attr("checked", true);
+            $("#txt_username").val($.cookie("username"));
+            $("#txt_password").val($.cookie("password"));
+        }
+    });
+    //记住用户名密码  
+    function Save() {
+        if ($("#ck_rmbUser").attr("checked")) {
+            var str_username = $("#txt_username").val();
+            var str_password = $("#txt_password").val();
+            $.cookie("rmbUser", "true", {
+                expires: 7
+            }); //存储一个带7天期限的cookie  
+            $.cookie("username", str_username, {
+                expires: 7
+            });
+            $.cookie("password", str_password, {
+                expires: 7
+            });
+        } else {
+            $.cookie("rmbUser", "false", {
+                expire: -1
+            });
+            $.cookie("username", "", {
+                expires: -1
+            });
+            $.cookie("password", "", {
+                expires: -1
+            });
+        }
+    };
+ </script>
+</body>
+
+</html>
