@@ -1,0 +1,1 @@
+学习bootstrap和php做的一个后台管理项目，使用了一些插件包括ligerUi.js、 list.js、等等。
